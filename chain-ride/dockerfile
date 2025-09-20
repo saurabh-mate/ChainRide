@@ -1,0 +1,30 @@
+# Base image
+FROM node:18-bullseye
+
+# Set working directory
+WORKDIR /app
+
+# Copy root package files
+COPY package*.json ./
+
+# Install dependencies (frontend + backend)
+RUN npm install --legacy-peer-deps
+
+# Copy entire project
+COPY . .
+
+# Build frontend
+RUN npm run build --prefix ./ganache-dashboard
+
+# Move frontend build to backend public folder
+RUN mkdir -p ./backend/public
+RUN cp -r ./ganache-dashboard/build/* ./backend/public/
+
+# Set working directory to backend
+WORKDIR /app/backend
+
+# Expose backend port
+EXPOSE 3001
+
+# Start backend server
+CMD ["node", "server.js"]
