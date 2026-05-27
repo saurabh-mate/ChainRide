@@ -1,0 +1,34 @@
+services:
+  # 1. Database
+  database:
+    image: mongo:latest
+    container_name: chainride_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  # 2. Backend
+  backend:
+    build: ./backend
+    container_name: chainride_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://database:27017/chainride
+    depends_on:
+      - database
+
+  # 3. Frontend
+  frontend:
+    build: ./frontend
+    container_name: chainride_frontend
+    ports:
+      - "80:80"
+    environment:
+      - VITE_API_URL=http://localhost:5000/api
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:

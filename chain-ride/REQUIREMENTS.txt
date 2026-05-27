@@ -1,0 +1,192 @@
+================================================================================
+                    ChainRide — Software & Dependency Requirements
+================================================================================
+
+This document lists all software, tools, and packages required to run the
+ChainRide project locally.
+
+================================================================================
+SYSTEM REQUIREMENTS
+================================================================================
+
+• Node.js          — v18.x LTS or v20.x LTS (recommended)
+• npm              — v9.x or v10.x (comes with Node.js)
+• Git              — v2.x (for version control)
+• MongoDB          — v6.x or v7.x (local or Atlas cloud database)
+• Google Chrome    — Latest version (for development testing)
+
+================================================================================
+ENVIRONMENT VARIABLES (.env files)
+================================================================================
+
+Each module (backend, blockchain) requires a .env file.
+
+----- backend/.env -----
+PORT=5000
+MONGO_URI=mongodb://localhost:27017/chainride
+JWT_SECRET=your_super_secret_jwt_key_here
+GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+
+----- blockchain/.env -----
+SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/your_infura_key
+PRIVATE_KEY=your_wallet_private_key_here
+ETHERSCAN_API_KEY=your_etherscan_api_key_here
+
+================================================================================
+1. BACKEND — Node.js / Express API Server
+================================================================================
+
+Location: ./backend/
+
+--- Install dependencies ---
+cd backend
+npm install
+
+--- Runtime dependencies ---
+  express@^5.2.1       — Web framework
+  cors@^2.8.6         — Cross-origin resource sharing
+  dotenv@^17.4.1      — Environment variable loader
+  jsonwebtoken@^9.0.3 — JWT authentication
+  mongoose@^9.4.1     — MongoDB object modeling
+  multer@^2.1.1       — File upload handling
+  socket.io@^4.8.3    — Real-time communication (WebSockets)
+  bcryptjs@^3.0.3     — Password hashing
+
+--- To run ---
+  node server.js
+  # Server runs on http://localhost:5000
+
+================================================================================
+2. FRONTEND — React + Vite
+================================================================================
+
+Location: ./frontend/
+
+--- Install dependencies ---
+cd frontend
+npm install
+
+--- Runtime dependencies ---
+  react@^19.2.4          — UI library
+  react-dom@^19.2.4     — React DOM renderer
+  react-router-dom@^7.14.0 — Client-side routing
+  @react-google-maps/api@^2.20.8 — Google Maps integration
+  socket.io-client@^4.8.3 — Real-time client (WebSockets)
+  framer-motion@^12.38.0 — Animations
+  axios@^1.15.0          — HTTP client
+  react-icons@^5.6.0     — Icon library
+  react-qr-code@^2.0.18 — QR code generation
+  ethers@^6.16.0         — Ethereum interaction (wallet)
+  clsx@^2.1.1           — Conditional className utility
+  tailwind-merge@^3.5.0  — TailwindCSS class merging
+
+--- Dev dependencies ---
+  vite@^8.0.4            — Build tool & dev server
+  @vitejs/plugin-react@^6.0.1 — Vite React plugin
+  tailwindcss@^4.2.2     — CSS framework
+  @tailwindcss/postcss@^4.2.2 — TailwindCSS PostCSS plugin
+  postcss@^8.5.9         — CSS processing
+  autoprefixer@^10.4.27  — Vendor prefix automation
+  eslint@^9.39.4         — Linting
+  @eslint/js@^9.39.4     — ESLint JavaScript support
+  globals@^17.4.0        — ESLint globals
+  eslint-plugin-react-hooks@^7.0.1 — React Hooks linting
+  eslint-plugin-react-refresh@^0.5.2 — Vite refresh linting
+  @types/react@^19.2.14  — React TypeScript types
+  @types/react-dom@^19.2.3 — React DOM TypeScript types
+
+--- Build for production ---
+  npm run build
+  # Output goes to ./frontend/dist/
+
+--- To run in development ---
+  npm run dev
+  # Frontend runs on http://localhost:5173
+
+--- Environment variables (create .env in frontend/) ---
+  VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+
+================================================================================
+3. BLOCKCHAIN — Hardhat (Ethereum Development)
+================================================================================
+
+Location: ./blockchain/
+
+--- Install dependencies ---
+cd blockchain
+npm install
+
+--- Dev dependencies ---
+  hardhat@^2.22.18           — Ethereum development framework
+  @nomicfoundation/hardhat-chai-matchers@2.0.8 — Chai matchers
+  @nomicfoundation/hardhat-ethers@3.1.0 — Hardhat + ethers.js integration
+  chai@^4.3.7                — Assertion library for tests
+
+--- Runtime dependencies ---
+  @openzeppelin/contracts@4.9.6 — Secure smart contracts
+  ethers@^6.9.0               — Ethereum library
+  dotenv@^16.4.5              — Environment variable loader
+
+--- Hardhat commands ---
+  npx hardhat compile         — Compile smart contracts
+  npx hardhat test            — Run contract tests
+  npx hardhat node            — Start a local Ethereum node
+  npx hardhat run scripts/deploy.js --network localhost — Deploy locally
+  npx hardhat run scripts/deploy.js --network sepolia — Deploy to Sepolia
+
+================================================================================
+QUICK START — Running the Full Stack
+================================================================================
+
+1. Install Node.js (v18+), npm, and MongoDB locally.
+
+2. Clone the project and open in terminal.
+
+3. Start MongoDB:
+     mongod
+   (or use MongoDB Atlas connection string in .env)
+
+4. Set up backend:
+     cd backend
+     cp .env.example .env    # Fill in your credentials
+     npm install
+     node server.js
+   Backend will start at http://localhost:5000
+
+5. Set up frontend (new terminal):
+     cd frontend
+     cp .env.example .env    # Add your VITE_GOOGLE_MAPS_API_KEY
+     npm install
+     npm run dev
+   Frontend will start at http://localhost:5173
+
+6. (Optional) Set up blockchain:
+     cd blockchain
+     cp .env.example .env    # Fill in RPC URL and private key
+     npm install
+     npx hardhat compile
+     npx hardhat node        # Start local node on http://localhost:8545
+
+================================================================================
+ADDITIONAL NOTES
+================================================================================
+
+Google Maps API Key
+  — Required for: route calculation, distance/duration, fare estimation,
+    map display, address autocomplete, geolocation.
+  — Get a key at: https://console.cloud.google.com/apis/credentials
+  — Enable these APIs in Google Cloud Console:
+      • Maps JavaScript API
+      • Directions API
+      • Geocoding API
+      • Places API
+
+MongoDB Atlas (Cloud alternative)
+  — If using Atlas instead of local MongoDB, set:
+      MONGO_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/peerride
+
+Socket.IO
+  — Used for real-time features: driver location updates, ride status
+    changes, surge pricing notifications, live tracking.
+
+================================================================================

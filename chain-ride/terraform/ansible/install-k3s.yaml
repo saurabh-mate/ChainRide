@@ -1,0 +1,25 @@
+---
+- name: Install K3s on remote server
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure curl is installed
+      apt:
+        name: curl
+        update_cache: yes
+
+    - name: Install K3s with --tls-san using public IP
+      shell: |
+        curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--tls-san {{ ansible_host }}" sh -
+      args:
+        creates: /usr/local/bin/k3s
+
+    - name: Copy kubeconfig to home directory
+      command: cp /etc/rancher/k3s/k3s.yaml /home/ubuntu/k3s.yaml
+
+    - name: Change ownership and permissions of kubeconfig
+      file:
+        path: /home/ubuntu/k3s.yaml
+        owner: ubuntu
+        group: ubuntu
+        mode: '0600'

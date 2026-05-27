@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Environment secrets — NEVER commit these
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Build output
+dist/
+build/
+
+# Uploads (user-generated content — store in cloud storage in production)
+uploads/*
+!uploads/.gitkeep
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

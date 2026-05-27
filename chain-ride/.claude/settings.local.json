@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx hardhat:*)",
+      "Bash(mkdir -p contracts/legacy)",
+      "Bash(mv contracts/RideToken.sol contracts/RideEscrow.sol contracts/RideDisputeResolver.sol contracts/RideDAO.sol contracts/Ride.sol contracts/ReputationNFT.sol contracts/FeeManager.sol contracts/CarpoolOffer.sol contracts/legacy/)",
+      "Bash(mv contracts/legacy ../contracts_legacy)",
+      "Bash(rmdir contracts/legacy)",
+      "Bash(npx vite:*)",
+      "Bash(coderabbit --version)",
+      "Bash(coderabbit auth:*)",
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(npx --yes serve dist -p 4173 --no-clipboard)",
+      "Bash(curl -s http://localhost:4173)",
+      "Bash(pkill -f \"vite|serve\")",
+      "Bash(grep -n \"window.google\\\\|window.socket\\\\|navigate\\(\" src/pages/*.jsx src/components/*.jsx)",
+      "Bash(grep:*)",
+      "Bash(node:*)",
+      "Bash(curl -s http://localhost:5000/api/auth/login)",
+      "Bash(curl -s http://localhost:5174/)",
+      "Bash(curl -v http://localhost:5000/api/auth/login -X POST -H \"Content-Type: application/json\" -d '{\"phone\":\"test\",\"password\":\"test\"}')",
+      "Bash(curl -s http://localhost:5174/src/pages/Landing.jsx)",
+      "Bash(curl -s \"http://localhost:5174/@fs/D:/animated_website/frontend/src/pages/Landing.jsx\")",
+      "Bash(head -20 node_modules/react-qr-code/lib/index.js)",
+      "Bash(head -20 node_modules/react-qr-code/src/index.tsx)",
+      "Bash(npm run:*)",
+      "Bash(npx eslint:*)"
+    ]
+  }
+}

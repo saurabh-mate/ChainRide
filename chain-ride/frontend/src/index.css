@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+/* If you need theme extensions in v4, do it here */
+
+.map-container {
+  width: 100%;
+  height: 100%;
+}
