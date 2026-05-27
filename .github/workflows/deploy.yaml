@@ -52,11 +52,11 @@ jobs:
           git reset --hard HEAD
           git pull origin main
 
-          kubectl apply -f cluster-issuer.yaml --validate=false || true
-          kubectl apply -f chainride.yaml
+          kubectl apply -f chain-ride/k3s-files/cluster-issuer.yaml --validate=false || true
+          kubectl apply -f chain-ride/k3s-files/chainride.yaml
 
           kubectl rollout restart deployment/chainride-backend -n chainride
           kubectl rollout restart deployment/chainride-frontend -n chainride  
-                
+
           kubectl rollout status deployment/chainride-backend -n chainride --timeout=60s
           kubectl rollout status deployment/chainride-frontend -n chainride --timeout=60s
