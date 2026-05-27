@@ -41,7 +41,8 @@ jobs:
         username: ${{ secrets.CLUSTER_USER }}
         key: ${{ secrets.CLUSTER_SSH_KEY }}
         script: |
-          cd ~         
+          cd ~     
+          export KUBECONFIG=$HOME/k3s.yaml    
           kubectl apply -f cluster-issuer.yaml --validate=false || true
           kubectl apply -f chainride.yaml
           kubectl rollout restart deployment/backend-deployment
