@@ -76,7 +76,7 @@ spec:
           image: saurabhmate/chainride-backend:v1.1
           env:
             - name: MONGO_URI
-              value: "mongodb://mongodb-servvice:27017/chainride"
+              value: "mongodb://mongodb-service:27017/chainride"
           ports:
             - containerPort: 5000
 ---
@@ -151,7 +151,7 @@ spec:
               service:
                 name: backend-service
                 port:
-                  number: 5000
+                  number: 5001
           - path: /
             pathType: Prefix
             backend:
