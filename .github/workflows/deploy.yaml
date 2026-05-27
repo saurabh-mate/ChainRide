@@ -45,7 +45,7 @@ jobs:
           export KUBECONFIG=$HOME/k3s.yaml    
           kubectl apply -f cluster-issuer.yaml --validate=false || true
           kubectl apply -f chainride.yaml
-          kubectl rollout restart deployment/chainride-backend
-          kubectl rollout restart deployment/chainride-frontend          
-          kubectl rollout status deployment/chainride-backend --timeout=60s
-          kubectl rollout status deployment/chainride-frontend --timeout=60s
+          kubectl rollout restart deployment/chainride-backend -n chainride
+          kubectl rollout restart deployment/chainride-frontend -n chainride        
+          kubectl rollout status deployment/chainride-backend -n chainride --timeout=60s
+          kubectl rollout status deployment/chainride-frontend -n chainride --timeout=60s
