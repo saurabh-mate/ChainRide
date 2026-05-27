@@ -76,7 +76,7 @@ spec:
           image: saurabhmate/chainride-backend:v1.1
           env:
             - name: MONGO_URI
-              value: "mongodb://mongodb-service:27017/chainride"
+              value: "mongodb://mongodb-servvice:27017/chainride"
             # Add other env variables like JWT_SECRET or RPC_URL here
           ports:
             - containerPort: 5000
