@@ -77,7 +77,6 @@ spec:
           env:
             - name: MONGO_URI
               value: "mongodb://mongodb-servvice:27017/chainride"
-            # Add other env variables like JWT_SECRET or RPC_URL here
           ports:
             - containerPort: 5000
 ---

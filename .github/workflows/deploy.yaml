@@ -42,10 +42,21 @@ jobs:
         key: ${{ secrets.CLUSTER_SSH_KEY }}
         script: |
           cd ~     
-          export KUBECONFIG=$HOME/k3s.yaml    
+          export KUBECONFIG=$HOME/k3s.yaml  
+
+          if [ ! -d "ChainRide" ]; then
+            git clone https://github.com/saurabh-mate/ChainRide.git
+          fi
+          
+          cd ChainRide
+          git reset --hard HEAD
+          git pull origin main
+
           kubectl apply -f cluster-issuer.yaml --validate=false || true
           kubectl apply -f chainride.yaml
+
           kubectl rollout restart deployment/chainride-backend -n chainride
-          kubectl rollout restart deployment/chainride-frontend -n chainride        
+          kubectl rollout restart deployment/chainride-frontend -n chainride  
+                
           kubectl rollout status deployment/chainride-backend -n chainride --timeout=60s
           kubectl rollout status deployment/chainride-frontend -n chainride --timeout=60s
