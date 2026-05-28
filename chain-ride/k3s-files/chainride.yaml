@@ -73,10 +73,12 @@ spec:
     spec:
       containers:
         - name: backend
-          image: saurabhmate/chainride-backend:v1.1
+          image: saurabhmate/chainride-backend:latest
           imagePullPolicy: Always
+          # command: ["/bin/sh", "-c"]
+          # args: ["exit 1"]
           env:
-            - name: MONGODB_URI
+            - name: MONGO_URI
               value: "mongodb://mongodb-service:27017/chainride"
           ports:
             - containerPort: 5000
@@ -84,7 +86,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-service
+  name: backend-serice
   namespace: chainride
 spec:
   selector:
