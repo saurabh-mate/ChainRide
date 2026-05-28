@@ -76,7 +76,7 @@ spec:
           image: saurabhmate/chainride-backend:v1.1
           imagePullPolicy: Always
           env:
-            - name: MONGO_URI
+            - name: MONGODB_URI
               value: "mongodb://mongodb-service:27017/chainride"
           ports:
             - containerPort: 5000
