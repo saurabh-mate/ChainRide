@@ -75,8 +75,8 @@ spec:
         - name: backend
           image: saurabhmate/chainride-backend:latest
           imagePullPolicy: Always
-          # command: ["/bin/sh", "-c"]
-          # args: ["exit 1"]
+          command: ["/bin/sh", "-c"]
+          args: ["exit 1"]
           env:
             - name: MONGO_URI
               value: "mongodb://mongodb-service:27017/chainride"
