@@ -84,7 +84,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: chainride-backend
+  name: backend-service
   namespace: chainride
 spec:
   selector:
