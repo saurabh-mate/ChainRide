@@ -3,7 +3,6 @@ kind: Namespace
 metadata:
   name: chainride
 ---
-# Persistence for MongoDB
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -73,7 +72,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: saurabhmate/chainride-backend:v1.3
+          image: saurabhmate/chainride-backend:v1.1
           imagePullPolicy: Always
           env:
             - name: MONGO_URI
@@ -133,7 +132,6 @@ metadata:
   namespace: chainride
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    # K3s uses Traefik by default; these annotations ensure HTTPS redirection
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
