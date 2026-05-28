@@ -11,4 +11,4 @@ COPY . .
 # Match your server.js port
 EXPOSE 5000
 
-CMD ["node", "server.js"]
+CMD ["node", "servver.js"]
